@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مغير الأصوات | Voice Changer Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- خلفية متحركة -->
+    <div id="bg-animation">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="floating-notes" id="floating-notes"></div>
+    </div>
+
+    <!-- الحاوية الرئيسية -->
+    <div id="app">
+
+        <!-- الهيدر -->
+        <header id="header">
+            <div class="logo">
+                <span class="logo-icon">🎙️</span>
+                <div class="logo-text">
+                    <h1>Voice Changer Pro</h1>
+                    <p>مغير الأصوات الاحترافي</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- عرض الموجة الصوتية -->
+        <section id="visualizer-section">
+            <canvas id="visualizer"></canvas>
+            <div id="recording-time">00:00</div>
+            <div id="recording-status">
+                <span class="status-dot"></span>
+                <span class="status-text">جاهز للتسجيل</span>
+            </div>
+        </section>
+
+        <!-- أزرار التحكم الرئيسية -->
+        <section id="main-controls">
+            <button id="record-btn" class="control-btn record">
+                <span class="btn-icon">⏺️</span>
+                <span class="btn-label">تسجيل</span>
+            </button>
+            <button id="stop-btn" class="control-btn stop" disabled>
+                <span class="btn-icon">⏹️</span>
+                <span class="btn-label">إيقاف</span>
+            </button>
+            <button id="play-btn" class="control-btn play" disabled>
+                <span class="btn-icon">▶️</span>
+                <span class="btn-label">تشغيل</span>
+            </button>
+            <button id="download-btn" class="control-btn download" disabled>
+                <span class="btn-icon">💾</span>
+                <span class="btn-label">تحميل</span>
+            </button>
+        </section>
+
+        <!-- تأثيرات الصوت -->
+        <section id="effects-section">
+            <h2 class="section-title">🎭 تأثيرات الصوت</h2>
+
+            <div id="effects-grid">
+                <button class="effect-card active" data-effect="normal">
+                    <div class="effect-emoji">🎤</div>
+                    <div class="effect-name">عادي</div>
+                    <div class="effect-desc">الصوت الأصلي</div>
+                </button>
+
+                <button class="effect-card" data-effect="deep">
+                    <div class="effect-emoji">👹</div>
+                    <div class="effect-name">صوت عميق</div>
+                    <div class="effect-desc">مثل الوحش</div>
+                </button>
+
+                <button class="effect-card" data-effect="chipmunk">
+                    <div class="effect-emoji">🐿️</div>
+                    <div class="effect-name">سنجاب</div>
+                    <div class="effect-desc">صوت حاد وسريع</div>
+                </button>
+
+                <button class="effect-card" data-effect="robot">
+                    <div class="effect-emoji">🤖</div>
+                    <div class="effect-name">روبوت</div>
+                    <div class="effect-desc">صوت آلي</div>
+                </button>
+
+                <button class="effect-card" data-effect="echo">
+                    <div class="effect-emoji">🏔️</div>
+                    <div class="effect-name">صدى</div>
+                    <div class="effect-desc">مثل الجبال</div>
+                </button>
+
+                <button class="effect-card" data-effect="alien">
+                    <div class="effect-emoji">👽</div>
+                    <div class="effect-name">فضائي</div>
+                    <div class="effect-desc">صوت غريب</div>
+                </button>
+
+                <button class="effect-card" data-effect="underwater">
+                    <div class="effect-emoji">🌊</div>
+                    <div class="effect-name">تحت الماء</div>
+                    <div class="effect-desc">صوت مكتوم</div>
+                </button>
+
+                <button class="effect-card" data-effect="telephone">
+                    <div class="effect-emoji">📞</div>
+                    <div class="effect-name">هاتف قديم</div>
+                    <div class="effect-desc">صوت تليفون</div>
+                </button>
+
+                <button class="effect-card" data-effect="cave">
+                    <div class="effect-emoji">🦇</div>
+                    <div class="effect-name">كهف</div>
+                    <div class="effect-desc">صدى عميق</div>
+                </button>
+
+                <button class="effect-card" data-effect="megaphone">
+                    <div class="effect-emoji">📢</div>
+                    <div class="effect-name">مكبر صوت</div>
+                    <div class="effect-desc">صوت عالي</div>
+                </button>
+
+                <button class="effect-card" data-effect="ghost">
+                    <div class="effect-emoji">👻</div>
+                    <div class="effect-name">شبح</div>
+                    <div class="effect-desc">صوت مرعب</div>
+                </button>
+
+                <button class="effect-card" data-effect="radio">
+                    <div class="effect-emoji">📻</div>
+                    <div class="effect-name">راديو</div>
+                    <div class="effect-desc">صوت قديم</div>
+                </button>
+
+                <button class="effect-card" data-effect="helium">
+                    <div class="effect-emoji">🎈</div>
+                    <div class="effect-name">هيليوم</div>
+                    <div class="effect-desc">صوت بالون</div>
+                </button>
+
+                <button class="effect-card" data-effect="darth">
+                    <div class="effect-emoji">⚔️</div>
+                    <div class="effect-name">دارث فيدر</div>
+                    <div class="effect-desc">صوت مظلم</div>
+                </button>
+
+                <button class="effect-card" data-effect="chorus">
+                    <div class="effect-emoji">🎶</div>
+                    <div class="effect-name">كورال</div>
+                    <div class="effect-desc">أصوات متعددة</div>
+                </button>
+
+                <button class="effect-card" data-effect="reverse">
+                    <div class="effect-emoji">🔄</div>
+                    <div class="effect-name">معكوس</div>
+                    <div class="effect-desc">تشغيل بالعكس</div>
+                </button>
+            </div>
+        </section>
+
+        <!-- تحكم متقدم -->
+        <section id="advanced-controls">
+            <h2 class="section-title">🎛️ تحكم متقدم</h2>
+
+            <div id="sliders-grid">
+                <div class="slider-group">
+                    <label>🔊 مستوى الصوت</label>
+                    <input type="range" id="volume-slider" min="0" max="200" value="100">
+                    <span class="slider-value" id="volume-value">100%</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>🎵 درجة الصوت (Pitch)</label>
+                    <input type="range" id="pitch-slider" min="25" max="400" value="100">
+                    <span class="slider-value" id="pitch-value">1.0x</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>⏩ سرعة التشغيل</label>
+                    <input type="range" id="speed-slider" min="25" max="300" value="100">
+                    <span class="slider-value" id="speed-value">1.0x</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>🔉 تردد منخفض (Bass)</label>
+                    <input type="range" id="bass-slider" min="-20" max="20" value="0">
+                    <span class="slider-value" id="bass-value">0 dB</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>🔊 تردد عالي (Treble)</label>
+                    <input type="range" id="treble-slider" min="-20" max="20" value="0">
+                    <span class="slider-value" id="treble-value">0 dB</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>🏔️ كمية الصدى</label>
+                    <input type="range" id="reverb-slider" min="0" max="100" value="0">
+                    <span class="slider-value" id="reverb-value">0%</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>📊 تشويه (Distortion)</label>
+                    <input type="range" id="distortion-slider" min="0" max="100" value="0">
+                    <span class="slider-value" id="distortion-value">0%</span>
+                </div>
+
+                <div class="slider-group">
+                    <label>🌀 ترميلو (Tremolo)</label>
+                    <input type="range" id="tremolo-slider" min="0" max="100" value="0">
+                    <span class="slider-value" id="tremolo-value">0%</span>
+                </div>
+            </div>
+
+            <div class="reset-row">
+                <button id="reset-btn" class="reset-button">🔄 إعادة ضبط الكل</button>
+            </div>
+        </section>
+
+        <!-- التسجيلات المحفوظة -->
+        <section id="recordings-section">
+            <h2 class="section-title">📁 التسجيلات المحفوظة</h2>
+            <div id="recordings-list">
+                <div class="empty-state">
+                    <span>🎙️</span>
+                    <p>لا يوجد تسجيلات بعد</p>
+                    <small>ابدأ بالتسجيل لإضافة تسجيلات هنا</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer id="footer">
+            <p>🎙️ Voice Changer Pro | مغير الأصوات الاحترافي</p>
+            <p class="footer-small">صنع بـ ❤️ باستخدام Web Audio API</p>
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
